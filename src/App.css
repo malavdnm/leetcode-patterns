@@ -1,0 +1,5 @@
+/* App-level layout overrides */
+#root {
+  max-width: 100%;
+  padding: 0;
+}

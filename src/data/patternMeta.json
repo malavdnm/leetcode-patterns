@@ -1,0 +1,87 @@
+[
+  [
+    "dp",
+    "Dynamic Programming",
+    "#6d28d9"
+  ],
+  [
+    "greedy",
+    "Greedy",
+    "#b45309"
+  ],
+  [
+    "binary-search",
+    "Binary Search",
+    "#0369a1"
+  ],
+  [
+    "two-pointers",
+    "Two Pointers + Sliding Window",
+    "#0891b2"
+  ],
+  [
+    "graph",
+    "Graph",
+    "#dc2626"
+  ],
+  [
+    "trees",
+    "Trees",
+    "#16a34a"
+  ],
+  [
+    "stack",
+    "Stack + Monotonic Stack",
+    "#9333ea"
+  ],
+  [
+    "heap",
+    "Heap / Priority Queue",
+    "#c026d3"
+  ],
+  [
+    "backtracking",
+    "Backtracking + Recursion",
+    "#ea580c"
+  ],
+  [
+    "linked-list",
+    "Linked List",
+    "#059669"
+  ],
+  [
+    "trie-string",
+    "Trie + String Algorithms",
+    "#2563eb"
+  ],
+  [
+    "bit-manipulation",
+    "Bit Manipulation",
+    "#475569"
+  ],
+  [
+    "design",
+    "Design / Data Structures",
+    "#be185d"
+  ],
+  [
+    "segment-tree",
+    "Segment Tree + BIT",
+    "#7c2d12"
+  ],
+  [
+    "math",
+    "Math + Number Theory",
+    "#4338ca"
+  ],
+  [
+    "divide-conquer",
+    "Divide and Conquer + Sorting",
+    "#a16207"
+  ],
+  [
+    "misc",
+    "Miscellaneous",
+    "#6b7280"
+  ]
+]
