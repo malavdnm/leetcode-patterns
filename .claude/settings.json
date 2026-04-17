@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(head -20 src/lib/*.js)",
+      "Bash(git add:*)"
+    ],
+    "additionalDirectories": [
+      "/Users/devkinandanmalav/Documents/leetcode-patterns/e2e"
+    ]
+  }
+}

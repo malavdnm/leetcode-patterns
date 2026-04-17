@@ -2,7 +2,7 @@ import patternMeta from '../data/patternMeta.json';
 
 export default function PatternTabs({ curPat, onSwitch, problems, patterns, isDone }) {
   return (
-    <div className="tabs">
+    <div className="ptabs">
       {patternMeta.map(([k, nm, col]) => {
         const pat = patterns[k];
         const allNums = pat ? pat.buckets.flatMap(b => b.subs.flatMap(s => [...(s.rep||[]), ...(s.var||[]), ...(s.similar||[])])) : [];
@@ -20,7 +20,7 @@ export default function PatternTabs({ curPat, onSwitch, problems, patterns, isDo
             onClick={() => onSwitch(k, col)}
           >
             <span className="pnm">{nm}</span>
-            <span className="pc">{done}/{unique.length}</span>
+            <span className="cnt">{done}/{unique.length}</span>
           </div>
         );
       })}

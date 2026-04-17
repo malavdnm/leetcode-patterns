@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function TemplateModal({ sub, onClose }) {
   const ref = useRef();
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const handler = (e) => { if (e.key === 'Escape') onClose(); };
@@ -11,15 +12,32 @@ export default function TemplateModal({ sub, onClose }) {
 
   if (!sub) return null;
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(sub.template || '').then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  };
+
   return (
-    <div className="modal-bg" onClick={e => { if (e.target === ref.current) onClose(); }} ref={ref}>
-      <div className="modal tpl-modal">
-        <div className="tpl-header">
-          <span className="tpl-title">{sub.idea}</span>
-          <button className="tpl-close" onClick={onClose}>✕</button>
+    <div id="tplModal" className="modal-bg show" ref={ref}
+      onClick={e => { if (e.target === ref.current) onClose(); }}>
+      <div className="modal">
+        <div className="tpl-head">
+          <h3>{sub.idea}</h3>
+          <button className="tpl-close-x" onClick={onClose}>✕</button>
         </div>
-        {sub.insight && <div className="tpl-insight">{sub.insight}</div>}
-        <pre className="tpl-code"><code>{sub.template}</code></pre>
+        {sub.insight && <div className="tpl-meta">{sub.insight}</div>}
+        {sub.template
+          ? <pre className="tpl-code">{sub.template}</pre>
+          : <div className="tpl-none">No template available.</div>
+        }
+        <div className="tpl-footer">
+          <button className="tpl-copy-btn" onClick={handleCopy}>
+            {copied ? 'Copied!' : 'Copy'}
+          </button>
+          <span className="tpl-hint">Press Esc to close</span>
+        </div>
       </div>
     </div>
   );

@@ -1,11 +1,14 @@
+import companies from '../data/companies.json';
+
 const TAGS = ['redo', 'tricky', 'tle', 'hint'];
 const TLAB = { redo: 'redo', tricky: 'tricky', tle: 'TLE', hint: 'hint' };
 
-export default function ProblemRow({ n, problems, role, isDone, getNote, hasTag, setDone, setNote, toggleTag, googSet }) {
+export default function ProblemRow({ n, problems, role, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets, onOpenMove }) {
   const p = problems[String(n)];
   if (!p) return null;
   const done = isDone(n);
-  const isGoogle = googSet.has(n);
+
+  const canMove = typeof onOpenMove === 'function';
 
   return (
     <div className={`pr${done ? ' dn' : ''}`} id={`pr-${n}`}>
@@ -20,7 +23,6 @@ export default function ProblemRow({ n, problems, role, isDone, getNote, hasTag,
         </a>
         {' '}
         <span className={`db d${p.diff}`}>{p.diff}</span>
-        {isGoogle && <span className="gbadge">G</span>}
       </span>
       <span className="tags">
         {TAGS.map(t => (
@@ -40,6 +42,20 @@ export default function ProblemRow({ n, problems, role, isDone, getNote, hasTag,
         value={getNote(n)}
         onChange={e => setNote(n, e.target.value)}
       />
+      {Object.entries(companies).map(([key, co]) =>
+        companySets[key]?.has(n) ? (
+          <img key={key} className="gbadge" src={co.favicon} alt={co.name} title={co.name} />
+        ) : null
+      )}
+      {canMove && (
+        <button
+          className="mv"
+          onClick={e => { e.stopPropagation(); onOpenMove(n, role); }}
+          title={canMove === 'request' ? 'Suggest reorganisation' : 'Move / Copy / Delete'}
+        >
+          ⇄
+        </button>
+      )}
     </div>
   );
 }

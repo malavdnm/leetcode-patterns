@@ -64,5 +64,11 @@ export function useProgress() {
     });
   }, [update]);
 
-  return { store, isDone, getNote, getTags, hasTag, setDone, setNote, toggleTag };
+  const replaceStore = useCallback((nextStore) => {
+    if (!nextStore || typeof nextStore !== 'object') return;
+    setStore(nextStore);
+    saveStore(nextStore);
+  }, []);
+
+  return { store, isDone, getNote, getTags, hasTag, setDone, setNote, toggleTag, replaceStore };
 }

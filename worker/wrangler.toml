@@ -1,0 +1,8 @@
+name = "lc-sync-worker"
+main = "src/index.ts"
+compatibility_date = "2026-04-08"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id = "d18a672dbfde4350a9e6944d7be5394d"
+preview_id = "007b4996b06c4789a3e0e86f50c0de75"

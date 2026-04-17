@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ProblemRow from './ProblemRow';
 import { countVisible } from '../utils/filter';
 
-export default function SubIdea({ sub, bi, si, patKey, problems, filters, isDone, getNote, hasTag, setDone, setNote, toggleTag, googSet, onOpenTemplate, isOpen }) {
+export default function SubIdea({ sub, bi, si, patKey, problems, filters, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets, onOpenTemplate, onOpenMove, isOpen }) {
   const [showVar, setShowVar] = useState(false);
   const [showSim, setShowSim] = useState(false);
 
@@ -10,15 +10,16 @@ export default function SubIdea({ sub, bi, si, patKey, problems, filters, isDone
   const varNums   = filters.repOnly ? [] : (sub.var || []);
   const simNums   = filters.repOnly ? [] : (sub.similar || []);
 
-  const rc = countVisible(repNums, problems, filters, isDone, hasTag, googSet);
-  const vc = countVisible(varNums, problems, filters, isDone, hasTag, googSet);
-  const pc = countVisible(simNums, problems, filters, isDone, hasTag, googSet);
+  const rc = countVisible(repNums, problems, filters, isDone, hasTag, companySets);
+  const vc = countVisible(varNums, problems, filters, isDone, hasTag, companySets);
+  const pc = countVisible(simNums, problems, filters, isDone, hasTag, companySets);
 
   if (rc + vc + pc === 0) return null;
 
   const open = isOpen || !!filters.search;
 
-  const rowProps = { problems, isDone, getNote, hasTag, setDone, setNote, toggleTag, googSet };
+  const makeMove = onOpenMove ? (role) => (n) => onOpenMove({ num: n, patKey, bi, si, role }) : null;
+  const rowProps = { problems, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets };
 
   return (
     <div id={`sub-${bi}-${si}`} className="sub">
@@ -34,7 +35,7 @@ export default function SubIdea({ sub, bi, si, patKey, problems, filters, isDone
       {rc > 0 && (
         <div className="ts">
           <span className="tl rep">Rep</span>
-          {repNums.map(n => <ProblemRow key={n} n={n} role="rep" {...rowProps} />)}
+          {repNums.map(n => <ProblemRow key={n} n={n} role="rep" onOpenMove={makeMove?.('rep')} {...rowProps} />)}
         </div>
       )}
 
@@ -45,7 +46,7 @@ export default function SubIdea({ sub, bi, si, patKey, problems, filters, isDone
           </span>
           <div className={showVar || open ? '' : 'hid'}>
             <span className="tl va">Variation</span>
-            {varNums.map(n => <ProblemRow key={n} n={n} role="var" {...rowProps} />)}
+            {varNums.map(n => <ProblemRow key={n} n={n} role="var" onOpenMove={makeMove?.('var')} {...rowProps} />)}
           </div>
         </div>
       )}
@@ -57,7 +58,7 @@ export default function SubIdea({ sub, bi, si, patKey, problems, filters, isDone
           </span>
           <div className={showSim || open ? '' : 'hid'}>
             <span className="tl pa">Similar</span>
-            {simNums.map(n => <ProblemRow key={n} n={n} role="similar" {...rowProps} />)}
+            {simNums.map(n => <ProblemRow key={n} n={n} role="similar" onOpenMove={makeMove?.('similar')} {...rowProps} />)}
           </div>
         </div>
       )}

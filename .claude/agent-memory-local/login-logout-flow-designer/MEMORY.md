@@ -1,0 +1,1 @@
+- [Auth stack and design system](project_auth_stack.md) -- Supabase GitHub OAuth, React 19, plain CSS custom properties, light/dark theming
