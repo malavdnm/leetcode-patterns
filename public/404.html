@@ -7,9 +7,17 @@
   </head>
   <body>
     <script>
+      // If URL has access_token or other OAuth params in hash, preserve them
+      // Otherwise redirect to app root
       const path = window.location.pathname;
+      const hash = window.location.hash;
       const basePath = '/leetcode-patterns';
-      if (path.startsWith(basePath)) {
+
+      if (hash.includes('access_token') || hash.includes('code')) {
+        // OAuth callback - load app root with hash intact
+        window.location.replace(basePath + '/' + hash);
+      } else if (path.startsWith(basePath)) {
+        // Other 404s - redirect to app root with path as hash
         window.location.replace(basePath + '/#' + path.slice(basePath.length));
       } else {
         window.location.replace('/');
