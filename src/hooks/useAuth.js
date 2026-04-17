@@ -78,7 +78,7 @@ export function useAuth() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
         options: {
-          redirectTo: `${window.location.origin}/auth/v1/callback`,
+          redirectTo: `${window.location.origin}${import.meta.env.BASE_URL}auth/v1/callback`,
         },
       });
       if (error) {
