@@ -333,6 +333,62 @@ describe('Case 8 — load merges unsaved local changes', () => {
   });
 });
 
+// ── Case 10: Load never drops local keys (signed-in refresh regression) ──────
+describe('Case 10 — load never drops local keys', () => {
+  beforeEach(() => { vi.useFakeTimers(); vi.restoreAllMocks(); });
+  afterEach(() => { vi.useRealTimers(); localStorage.clear(); });
+
+  it('preserves local keys when remote returns empty and baseline matches local', async () => {
+    // lc_synced_v1 claims "{1: true} already synced", but server lost the row
+    localStorage.setItem('lc_synced_v1', JSON.stringify({ '1': { d: true } }));
+    vi.stubGlobal('fetch', makeLoadFetch({})); // server returns empty store
+    const replaceStore = vi.fn();
+
+    renderHook(() => useSync({
+      ...BASE_PROPS,
+      user: { id: 'u-regress' },
+      store: { '1': { d: true } }, // local still has it
+      replaceStore,
+    }));
+    await act(async () => { await vi.advanceTimersByTimeAsync(0); });
+
+    // Must not wipe local — merged must still contain '1'
+    expect(replaceStore).toHaveBeenCalledWith({ '1': { d: true } });
+  });
+
+  it('union-merges remote-only keys with local-only keys', async () => {
+    vi.stubGlobal('fetch', makeLoadFetch({ '5': { d: true } }));
+    const replaceStore = vi.fn();
+
+    renderHook(() => useSync({
+      ...BASE_PROPS,
+      user: { id: 'u-union' },
+      store: { '9': { d: true } },
+      replaceStore,
+    }));
+    await act(async () => { await vi.advanceTimersByTimeAsync(0); });
+
+    expect(replaceStore).toHaveBeenCalledWith({ '5': { d: true }, '9': { d: true } });
+  });
+
+  it('local wins on key conflict (stale remote cannot overwrite)', async () => {
+    // Remote has '1' marked done, local has '1' with a note added
+    vi.stubGlobal('fetch', makeLoadFetch({ '1': { d: true } }));
+    const replaceStore = vi.fn();
+
+    renderHook(() => useSync({
+      ...BASE_PROPS,
+      user: { id: 'u-conflict' },
+      store: { '1': { d: true, n: 'my note' } },
+      replaceStore,
+    }));
+    await act(async () => { await vi.advanceTimersByTimeAsync(0); });
+
+    // Local version (with note) must win
+    expect(replaceStore).toHaveBeenCalledWith({ '1': { d: true, n: 'my note' } });
+  });
+});
+
 // ── Case 9: Status transitions ────────────────────────────────────────────────
 describe('Case 9 — status transitions', () => {
   beforeEach(() => { vi.useFakeTimers(); vi.restoreAllMocks(); });
@@ -382,5 +438,73 @@ describe('Case 9 — status transitions', () => {
 
     // Should be pending again since '2' is unsaved
     expect(result.current.syncStatus).toBe('pending');
+  });
+});
+
+// ── computePatch / buildPayload — key-order invariance ────────────────────────
+// Postgres JSONB does not preserve insertion order, so a remote round-trip can
+// return values whose keys are in a different order than what the client wrote.
+// The diff must be structural, not string-based, otherwise we surface phantom
+// "Changes pending…" and fire unnecessary /save calls after every load.
+describe('computePatch — key-order invariance', () => {
+  it('returns null when values are structurally equal but keys are reordered', () => {
+    expect(computePatch(
+      { '70': { d: true, ts: 1 } },
+      { '70': { ts: 1, d: true } },
+    )).toBeNull();
+  });
+
+  it('still detects real changes even with reordered keys', () => {
+    expect(computePatch(
+      { '70': { d: true, ts: 1 } },
+      { '70': { ts: 2, d: true } },
+    )).toEqual({ '70': { ts: 2, d: true } });
+  });
+
+  it('treats arrays as order-sensitive', () => {
+    expect(computePatch(
+      { '70': { t: ['a', 'b'] } },
+      { '70': { t: ['b', 'a'] } },
+    )).toEqual({ '70': { t: ['b', 'a'] } });
+  });
+});
+
+describe('buildPayload — key-order invariance', () => {
+  it('returns null when only key order differs', () => {
+    expect(buildPayload(
+      { '70': { d: true, ts: 1 } },
+      { '70': { ts: 1, d: true } },
+    )).toBeNull();
+  });
+});
+
+// ── Case 11: No phantom save after load with reordered remote keys ───────────
+describe('Case 11 — no phantom save after load', () => {
+  beforeEach(() => { vi.useFakeTimers(); vi.restoreAllMocks(); });
+  afterEach(() => { vi.useRealTimers(); });
+
+  it('does not POST /save when remote equals local but keys are reordered', async () => {
+    // Remote returns keys in JSONB-ish order; local has insertion order.
+    const remote = { '70': { ts: 1, d: true } };
+    const local  = { '70': { d: true, ts: 1 } };
+
+    // Seed the baseline so the pre-load schedule-flush effect also sees "no diff".
+    localStorage.setItem('lc_synced_v1', JSON.stringify(local));
+
+    const fetchMock = makeLoadFetch(remote);
+    vi.stubGlobal('fetch', fetchMock);
+
+    renderHook(() => useSync({
+      ...BASE_PROPS,
+      user: { id: 'u-reorder' },
+      store: local,
+      replaceStore: vi.fn(),
+    }));
+    await act(async () => { await vi.advanceTimersByTimeAsync(0); });
+    await act(async () => { await vi.advanceTimersByTimeAsync(DEBOUNCE_MS + 100); });
+
+    const saveCalls = fetchMock.mock.calls.filter(([u]) => String(u).endsWith('/save'));
+    expect(saveCalls).toHaveLength(0);
+    localStorage.clear();
   });
 });

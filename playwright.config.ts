@@ -14,6 +14,10 @@ export default defineConfig({
     url: 'http://localhost:5173',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
+    // Shorter debounce so tests exercising the save path finish quickly.
+    // If you're reusing an existing dev server, restart it with this env
+    // set for the sync-signed-in spec to run fast.
+    env: { VITE_SYNC_DEBOUNCE_MS: '500' },
   },
 
   projects: [

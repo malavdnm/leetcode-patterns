@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
-export const DEBOUNCE_MS        = Number(import.meta.env.VITE_SYNC_DEBOUNCE_MS) || 30_000;
+export const DEBOUNCE_MS        = Number(import.meta.env.VITE_SYNC_DEBOUNCE_MS) || 60_000;
 export const RETRY_AFTER_429_MS = 30_000;
 export const MAX_BLOB_BYTES     = 100 * 1024;
 const        SYNCED_LSK         = 'lc_synced_v1';
@@ -23,6 +23,31 @@ function saveSyncedStore(store) {
 // ── Pure helpers (exported for tests) ────────────────────────────────────────
 
 /**
+ * Structural deep-equal for plain JSON values (primitives, arrays, plain
+ * objects). Key order is ignored for objects; array order is preserved.
+ *
+ * Needed because the server stores progress as Postgres JSONB, which does not
+ * preserve insertion order. A naive JSON.stringify compare would flag
+ * `{d,ts}` vs `{ts,d}` as different and trigger a phantom save.
+ */
+function deepEqual(a, b) {
+  if (a === b) return true;
+  if (a === null || b === null) return a === b;
+  if (typeof a !== 'object' || typeof b !== 'object') return false;
+  if (Array.isArray(a) !== Array.isArray(b)) return false;
+  if (Array.isArray(a)) {
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) if (!deepEqual(a[i], b[i])) return false;
+    return true;
+  }
+  const ak = Object.keys(a);
+  const bk = Object.keys(b);
+  if (ak.length !== bk.length) return false;
+  for (const k of ak) if (!deepEqual(a[k], b[k])) return false;
+  return true;
+}
+
+/**
  * Compute a delta patch between two store snapshots.
  * Keys present in curr but different from prev → update
  * Keys in prev but missing from curr            → null (deletion signal)
@@ -31,7 +56,7 @@ function saveSyncedStore(store) {
 export function computePatch(prev, curr) {
   const patch = {};
   for (const [k, v] of Object.entries(curr)) {
-    if (JSON.stringify(prev[k]) !== JSON.stringify(v)) patch[k] = v;
+    if (!deepEqual(prev[k], v)) patch[k] = v;
   }
   for (const k of Object.keys(prev)) {
     if (!(k in curr)) patch[k] = null;
@@ -211,19 +236,14 @@ export function useSync({ user, session, store, replaceStore, workerUrlOverride 
         const remoteStore = json?.data?.store;
 
         if (remoteStore && typeof remoteStore === 'object') {
-          // Preserve local edits made before load completed (e.g. user
-          // checked something, then the load response arrived).
-          const unsaved = computePatch(lastSyncedRef.current ?? {}, storeRef.current);
-          if (unsaved) {
-            const merged = { ...remoteStore };
-            for (const [k, v] of Object.entries(unsaved)) {
-              if (v === null) delete merged[k];
-              else merged[k] = v;
-            }
-            replaceStore(merged);
-          } else {
-            replaceStore(remoteStore);
-          }
+          // Union merge: remote keys first, then overlay current local state.
+          // Local always wins on conflict so user progress is never silently
+          // dropped when the baseline is stale (e.g. previous OAuth wrote
+          // under a different user.id, or the server row was wiped).
+          const merged = { ...remoteStore, ...storeRef.current };
+          replaceStore(merged);
+          // Baseline = what the server actually has. Any extra local keys
+          // become a legitimate diff that the debounce effect pushes up.
           lastSyncedRef.current = { ...remoteStore };
           saveSyncedStore(remoteStore);
         } else {
