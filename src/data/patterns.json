@@ -15522,5 +15522,54 @@
         ]
       }
     ]
+  },
+  "favorites": {
+    "name": "Personal Favorites",
+    "buckets": [
+      {
+        "name": "Hand-picked",
+        "tier": "Personal",
+        "subs": [
+          {
+            "idea": "Hard favorites",
+            "insight": "Personally interesting hard problems worth revisiting.",
+            "rep": [
+              3500,
+              2167,
+              1851,
+              715,
+              765,
+              741,
+              115,
+              1755,
+              2019,
+              32,
+              3203,
+              689,
+              3382,
+              2818,
+              632,
+              2035,
+              1192
+            ]
+          },
+          {
+            "idea": "Medium favorites",
+            "insight": "Personally interesting medium problems worth revisiting.",
+            "rep": [
+              2289,
+              650,
+              1048,
+              526,
+              437,
+              787,
+              179,
+              678,
+              1310
+            ]
+          }
+        ]
+      }
+    ]
   }
 }

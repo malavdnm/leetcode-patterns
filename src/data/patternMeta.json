@@ -1,5 +1,10 @@
 [
   [
+    "favorites",
+    "Personal Favorites",
+    "#db2777"
+  ],
+  [
     "dp",
     "Dynamic Programming",
     "#6d28d9"
