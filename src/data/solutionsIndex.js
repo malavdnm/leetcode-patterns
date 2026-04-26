@@ -1,7 +1,8 @@
 // Build-time scan of /solutions/*.py.
-// Vite resolves this glob during dev and build; no runtime fs access.
-// We never load file contents — only filenames are used to populate the Set.
-const files = import.meta.glob('/solutions/*.py');
+// `query: '?url'` tells Vite to treat matches as URL assets, not JS modules,
+// so it never tries to parse Python source as JavaScript. We only use the
+// keys (filenames) — the URL values themselves are never read.
+const files = import.meta.glob('/solutions/*.py', { query: '?url', eager: true });
 
 const numbers = new Set();
 for (const path of Object.keys(files)) {
