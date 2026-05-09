@@ -4761,32 +4761,18 @@
               170
             ],
             "similar": [
-              633,
-              532,
               653,
-              1214,
-              1099,
-              888,
-              1679,
-              1346,
-              2824,
-              1237,
-              1385,
-              594,
-              1471,
-              2540,
-              3477,
-              1782,
-              1885,
-              2035,
+              1498,
+              532,
               2130,
+              2035,
+              1679,
+              633,
               2300,
-              2563,
-              2856,
-              3284,
-              3649,
-              3752,
-              1498
+              594,
+              1346,
+              888,
+              2563
             ],
             "template": "def twoSum(numbers, target):\n    l, r = 0, len(numbers) - 1\n    while l < r:\n        total = numbers[l] + numbers[r]\n        if total == target:   return [l+1, r+1]\n        elif total < target:  l += 1\n        else:                 r -= 1"
           },
@@ -4849,77 +4835,18 @@
               826
             ],
             "similar": [
-              870,
-              948,
-              2410,
-              2592,
-              1877,
-              825,
-              277,
-              321,
-              832,
               1048,
-              1455,
-              1577,
-              1634,
-              1650,
-              1697,
               1721,
-              1750,
-              1764,
-              1813,
-              1826,
-              1861,
-              1868,
-              1961,
-              1963,
-              1989,
-              2071,
-              2105,
-              2109,
-              2122,
               2149,
-              2200,
-              2332,
-              2337,
-              2396,
-              2441,
-              2462,
-              2465,
-              2491,
-              2503,
-              2511,
-              2562,
-              2576,
-              2604,
-              2674,
-              2868,
-              2903,
-              2905,
-              2938,
-              3006,
-              3008,
-              3132,
-              3186,
-              3194,
-              3218,
-              3239,
-              3240,
-              3302,
-              3316,
-              3400,
-              3403,
-              3406,
-              3460,
-              3534,
-              3555,
-              3633,
-              3635,
-              3643,
-              3645,
-              3667,
-              3730,
-              3814
+              832,
+              948,
+              277,
+              1963,
+              1877,
+              321,
+              870,
+              1861,
+              2071
             ],
             "template": "def numRescueBoats(people, limit):\n    people.sort(); l, r = 0, len(people)-1; boats = 0\n    while l <= r:\n        if people[l] + people[r] <= limit: l += 1\n        r -= 1; boats += 1\n    return boats"
           }
@@ -5040,7 +4967,6 @@
               2108,
               1332,
               246,
-              3750,
               1147,
               1842,
               2000,
@@ -5103,46 +5029,18 @@
               1343
             ],
             "similar": [
-              2090,
-              1052,
-              1456,
-              2653,
               1423,
-              3318,
-              1652,
+              1456,
+              1052,
+              2090,
               1871,
-              1918,
-              2110,
-              2269,
+              1652,
               2379,
-              2524,
+              2110,
               2528,
-              2875,
-              2932,
-              2935,
-              3013,
-              3023,
-              3037,
-              3086,
-              3135,
-              3191,
-              3254,
-              3255,
-              3321,
-              3346,
-              3347,
-              3364,
-              3411,
-              3422,
-              3439,
-              3445,
-              3505,
-              3634,
-              3652,
-              3672,
-              3679,
-              3845,
-              3851
+              2653,
+              2269,
+              3191
             ],
             "template": "def findMaxAverage(nums, k):\n    window = sum(nums[:k]); best = window\n    for i in range(k, len(nums)):\n        window += nums[i] - nums[i-k]\n        best = max(best, window)\n    return best / k"
           },
@@ -5440,10 +5338,8 @@
               3297,
               3298,
               3325,
-              3329,
               3420,
-              3578,
-              3768
+              3578
             ],
             "template": "def numSubarrayBoundedMax(nums, left, right):\n    # Count subarrays with max in [left, right]\n    # = countAtMost(right) - countAtMost(left-1)\n    def countAtMost(bound):\n        count = cur = 0\n        for n in nums:\n            cur = cur + 1 if n <= bound else 0\n            count += cur\n        return count\n    return countAtMost(right) - countAtMost(left-1)"
           },
@@ -5498,7 +5394,6 @@
               2489,
               1124,
               1546,
-              2950,
               3026,
               3381,
               3654,
@@ -5589,76 +5484,20 @@
             ],
             "var": [],
             "similar": [
-              2270,
-              3788,
-              1621,
-              1664,
-              1687,
-              1856,
-              1872,
-              1894,
-              1895,
               1930,
-              1959,
-              1991,
-              2017,
-              2121,
-              2145,
-              2209,
-              2218,
-              2219,
-              2222,
-              2237,
-              2245,
-              2281,
-              2382,
-              2391,
-              2420,
-              2428,
-              2478,
               2483,
+              2218,
+              2017,
+              2391,
+              1991,
+              1856,
               2485,
-              2505,
-              2552,
+              1664,
+              2281,
               2615,
-              2640,
-              2845,
-              3015,
-              3017,
-              3028,
-              3070,
-              3077,
-              3096,
-              3147,
-              3152,
-              3179,
-              3225,
-              3250,
-              3251,
-              3279,
-              3312,
-              3356,
-              3425,
-              3427,
-              3473,
-              3480,
-              3486,
-              3494,
-              3500,
-              3538,
-              3540,
-              3546,
-              3548,
-              3599,
-              3632,
-              3636,
-              3699,
-              3709,
-              3756,
-              3771,
-              3797,
-              3826,
-              3864
+              1894,
+              2270,
+              2222
             ],
             "template": "def waysToPartition(nums, k):\n    n = len(nums); prefix = [0]*(n+1)\n    for i in range(n): prefix[i+1] = prefix[i] + nums[i]\n    total = prefix[n]; count = 0\n    # Count positions where prefix[i] == total/2 (original)\n    from collections import defaultdict\n    left_map = defaultdict(int); right_map = defaultdict(int)\n    for i in range(1, n): right_map[prefix[i]] += 1\n    if total % 2 == 0: count = right_map[total//2]\n    for i in range(n):\n        diff = k - nums[i]; new_total = total + diff\n        if new_total % 2 == 0:\n            half = new_total // 2\n            count = max(count, left_map[half - diff] + right_map[half])\n        if i+1 < n:\n            right_map[prefix[i+1]] -= 1\n            left_map[prefix[i+1]] += 1\n    return count"
           },
@@ -5752,28 +5591,19 @@
               1788
             ],
             "similar": [
-              1878,
-              1889,
-              1943,
-              2021,
-              2132,
-              2207,
-              2234,
-              2389,
               2439,
               2448,
-              2587,
+              2389,
               2602,
-              2680,
-              2681,
-              2731,
-              2819,
-              2838,
               3362,
-              3434,
-              3511,
-              3628,
-              3656
+              1943,
+              2731,
+              2207,
+              1878,
+              2234,
+              1889,
+              2680,
+              2132
             ],
             "template": "def maxPoints(nums, k):\n    # Generic: sort + prefix sum + greedy scan\n    nums.sort()\n    prefix = [0]*(len(nums)+1)\n    for i, n in enumerate(nums): prefix[i+1] = prefix[i]+n\n    # Binary search for window of sum <= k\n    from bisect import bisect_right\n    res = 0\n    for r in range(len(nums)):\n        target = nums[r] - k\n        l = bisect_right(nums, target-1, 0, r+1)-1  # placeholder\n        res = max(res, r - l)\n    return res"
           }
@@ -5826,11 +5656,8 @@
               2848,
               2772,
               3355,
-              1685,
               1906,
-              2256,
               3224,
-              3432,
               3698
             ],
             "template": "def corpFlightBookings(bookings, n):\n    diff = [0]*(n+2)\n    for first, last, seats in bookings:\n        diff[first] += seats; diff[last+1] -= seats\n    # prefix sum\n    for i in range(1, n+1): diff[i] += diff[i-1]\n    return diff[1:n+1]\n\ndef plantFlowers(plantTime, growTime, n):\n    diff = [0]*(n+2)\n    for plant, grow in zip(plantTime, growTime):\n        diff[plant] += 1; diff[plant+grow+1] -= 1\n    counts = []; running = 0\n    for i in range(n):\n        running += diff[i]; counts.append(running)\n    return counts"
@@ -5976,10 +5803,8 @@
               2825,
               1898,
               1755,
-              1960,
               2014,
               2565,
-              3455,
               3584,
               3685
             ],
@@ -6204,25 +6029,13 @@
               1926
             ],
             "similar": [
-              286,
-              542,
-              994,
-              1162,
               317,
               675,
-              2146,
-              1765,
-              2258,
-              407,
-              749,
-              2812,
-              1654,
-              490,
               1036,
-              1284,
+              2146,
+              490,
               1730,
               1778,
-              2556,
               3552
             ],
             "template": "from collections import deque\ndef shortestPathBinaryMatrix(grid):\n    n = len(grid)\n    if grid[0][0] or grid[n-1][n-1]: return -1\n    q = deque([(0,0,1)])\n    grid[0][0] = 1\n    while q:\n        r,c,d = q.popleft()\n        if r==n-1 and c==n-1: return d\n        for dr in [-1,0,1]:\n            for dc in [-1,0,1]:\n                nr,nc = r+dr,c+dc\n                if 0<=nr<n and 0<=nc<n and not grid[nr][nc]:\n                    grid[nr][nc]=1; q.append((nr,nc,d+1))\n    return -1"
@@ -6233,10 +6046,18 @@
             "rep": [
               417
             ],
-            "var": [],
+            "var": [
+              542
+            ],
             "similar": [
+              2258,
+              749,
               934,
-              3619
+              3619,
+              286,
+              994,
+              1162,
+              1765
             ],
             "template": "from collections import deque\ndef bfs(sources, matrix):\n    q = deque(sources); visited = set(sources)\n    while q:\n        r,c = q.popleft()\n        for dr,dc in [(-1,0),(1,0),(0,-1),(0,1)]:\n            nr,nc = r+dr,c+dc\n            if 0<=nr<rows and 0<=nc<cols and (nr,nc) not in visited                and matrix[nr][nc] >= matrix[r][c]:\n                visited.add((nr,nc)); q.append((nr,nc))\n    return visited\n# answer = pacific & atlantic intersection"
           },
@@ -6260,7 +6081,8 @@
               1210,
               773,
               815,
-              854
+              854,
+              1284
             ],
             "template": "from collections import deque\n# State = (node, visited_bitmask)\nn = len(graph)\ndist = [[float('inf')]*(1<<n) for _ in range(n)]\nq = deque()\nfor i in range(n): dist[i][1<<i]=0; q.append((i,1<<i,0))\nfull = (1<<n)-1\nwhile q:\n    node,mask,d = q.popleft()\n    if mask==full: return d\n    for nxt in graph[node]:\n        nm = mask|(1<<nxt)\n        if d+1 < dist[nxt][nm]:\n            dist[nxt][nm]=d+1; q.append((nxt,nm,d+1))"
           },
@@ -6311,11 +6133,10 @@
               694
             ],
             "similar": [
-              1254,
               711,
+              1254,
               419,
-              1905,
-              2092
+              1905
             ],
             "template": "def dfs(r,c):\n    if not (0<=r<rows and 0<=c<cols and grid[r][c]=='1'): return\n    grid[r][c]='0'\n    for dr,dc in [(-1,0),(1,0),(0,-1),(0,1)]: dfs(r+dr,c+dc)\n\ncount=0\nfor r in range(rows):\n    for c in range(cols):\n        if grid[r][c]=='1': dfs(r,c); count+=1\nreturn count"
           },
@@ -6329,7 +6150,6 @@
               547
             ],
             "similar": [
-              547,
               1311,
               2685,
               841,
@@ -6392,7 +6212,6 @@
               802
             ],
             "similar": [
-              261,
               2360
             ],
             "template": "# 0=unvisited, 1=in-stack (gray), 2=done (black)\nstate=[0]*n\ndef dfs(u):\n    state[u]=1\n    for v in graph[u]:\n        if state[v]==1: return True    # back edge = cycle\n        if state[v]==0 and dfs(v): return True\n    state[u]=2; return False\n\nreturn not any(dfs(u) for u in range(n) if state[u]==0)"
@@ -6407,8 +6226,9 @@
               685
             ],
             "similar": [
-              1319,
-              2204
+              2204,
+              261,
+              1319
             ],
             "template": "parent=list(range(n+1))\ndef find(x): parent[x]=find(parent[x]) if parent[x]!=x else x; return parent[x]\ndef union(a,b):\n    a,b=find(a),find(b)\n    if a==b: return False   # would create cycle\n    parent[a]=b; return True\n\nfor u,v in edges:\n    if not union(u,v): return [u,v]"
           }
@@ -6424,23 +6244,17 @@
             "rep": [
               210
             ],
-            "var": [],
+            "var": [
+              310
+            ],
             "similar": [
-              310,
               1136,
               2115,
               851,
               1557,
               2192,
-              913,
               1059,
-              1591,
-              1728,
-              2127,
-              2392,
-              2876,
-              3435,
-              3530
+              2392
             ],
             "template": "from collections import deque\nindegree=[0]*n; graph=[[] for _ in range(n)]\nfor u,v in prerequisites: graph[v].append(u); indegree[u]+=1\nq=deque(i for i in range(n) if indegree[i]==0)\norder=[]\nwhile q:\n    u=q.popleft(); order.append(u)\n    for v in graph[u]:\n        indegree[v]-=1\n        if indegree[v]==0: q.append(v)\nreturn order if len(order)==n else []"
           },
@@ -6455,8 +6269,8 @@
             ],
             "similar": [
               1203,
-              444,
-              631
+              631,
+              444
             ],
             "template": "from collections import defaultdict,deque\ngraph=defaultdict(set); indegree={c:0 for w in words for c in w}\nfor w1,w2 in zip(words,words[1:]):\n    for c1,c2 in zip(w1,w2):\n        if c1!=c2:\n            if c2 not in graph[c1]: graph[c1].add(c2); indegree[c2]+=1\n            break\n    else:\n        if len(w1)>len(w2): return \"\"\nq=deque(c for c in indegree if indegree[c]==0); result=[]\nwhile q:\n    c=q.popleft(); result.append(c)\n    for nb in graph[c]:\n        indegree[nb]-=1\n        if indegree[nb]==0: q.append(nb)\nreturn \"\".join(result) if len(result)==len(indegree) else \"\"  "
           },
@@ -6471,7 +6285,14 @@
               1462
             ],
             "similar": [
-              329
+              329,
+              913,
+              1728,
+              2127,
+              2876,
+              1591,
+              3435,
+              3530
             ],
             "template": "from collections import deque\nindegree=[0]*n; graph=[[] for _ in range(n)]\nfor u,v in relations: graph[u-1].append(v-1); indegree[v-1]+=1\ntime=[duration[i] for i in range(n)]\nq=deque(i for i in range(n) if indegree[i]==0)\nwhile q:\n    u=q.popleft()\n    for v in graph[u]:\n        time[v]=max(time[v],time[u]+duration[v])\n        indegree[v]-=1\n        if indegree[v]==0: q.append(v)\nreturn max(time) if all(indegree[i]==0 for i in range(n)) else -1"
           }
@@ -6488,38 +6309,48 @@
               743
             ],
             "var": [
-              1514
+              1514,
+              1976
             ],
             "similar": [
-              2203,
-              1976,
               1786,
-              3123,
+              2642,
+              2203,
               2699,
-              2737,
-              3112,
+              2065,
+              3243,
+              2608,
               3341,
               1548,
-              2065,
-              2247,
-              2297,
-              2608,
-              2642,
-              2959,
-              3015,
-              3017,
-              3243,
-              3244,
               3342,
-              3377,
-              3419,
-              3543,
-              3594,
-              3604,
-              3615,
-              3620
+              3123,
+              3419
             ],
             "template": "import heapq\ndist={i:float('inf') for i in range(1,n+1)}\ndist[k]=0; heap=[(0,k)]\nwhile heap:\n    d,u=heapq.heappop(heap)\n    if d>dist[u]: continue\n    for v,w in graph[u]:\n        if dist[u]+w < dist[v]:\n            dist[v]=dist[u]+w; heapq.heappush(heap,(dist[v],v))\nans=max(dist.values())\nreturn ans if ans<float('inf') else -1"
+          },
+          {
+            "idea": "Dijkstra Contest Variants / Recent & Niche",
+            "insight": "Dijkstra applied to recent contest variations (time, transport, recovery). Same skeleton, varied wrappers.",
+            "rep": [
+              3112
+            ],
+            "var": [],
+            "similar": [
+              3015,
+              3244,
+              2959,
+              2297,
+              3620,
+              3377,
+              3604,
+              3017,
+              3543,
+              2247,
+              2737,
+              3615,
+              3594
+            ],
+            "template": "# Same skeleton as 5.1 Classic Dijkstra. Niche/contest variants split out for cap compliance."
           },
           {
             "idea": "Grid Dijkstra / Min Path Effort",
@@ -6532,11 +6363,12 @@
               1102
             ],
             "similar": [
-              505,
               499,
-              1810,
               2577,
-              3286
+              505,
+              1810,
+              3286,
+              2812
             ],
             "template": "import heapq\ndist=[[float('inf')]*n for _ in range(m)]; dist[0][0]=0\nheap=[(0,0,0)]\nwhile heap:\n    eff,r,c=heapq.heappop(heap)\n    if r==m-1 and c==n-1: return eff\n    if eff>dist[r][c]: continue\n    for dr,dc in [(-1,0),(1,0),(0,-1),(0,1)]:\n        nr,nc=r+dr,c+dc\n        if 0<=nr<m and 0<=nc<n:\n            ne=max(eff,abs(heights[nr][nc]-heights[r][c]))\n            if ne<dist[nr][nc]: dist[nr][nc]=ne; heapq.heappush(heap,(ne,nr,nc))"
           },
@@ -6551,8 +6383,8 @@
               2093
             ],
             "similar": [
-              2662,
-              2714
+              2714,
+              2662
             ],
             "template": "import heapq\n# dist[node][stops] = min cost to reach node using at most 'stops' remaining\nINF=float('inf')\ndist=[[INF]*(k+2) for _ in range(n)]; dist[src][k+1]=0\nheap=[(0,src,k+1)]\nwhile heap:\n    cost,u,stops=heapq.heappop(heap)\n    if u==dst: return cost\n    if stops==0 or cost>dist[u][stops]: continue\n    for v,w in graph[u]:\n        nc=cost+w\n        if nc<dist[v][stops-1]:\n            dist[v][stops-1]=nc; heapq.heappush(heap,(nc,v,stops-1))\nreturn -1"
           },
@@ -6562,11 +6394,12 @@
             "rep": [
               882
             ],
-            "var": [],
+            "var": [
+              2473
+            ],
             "similar": [
-              2473,
-              3650,
-              2977
+              2977,
+              3650
             ],
             "template": "import heapq\n# Generic: Dijkstra where cost function varies per edge type\nheap=[(0,src)]; visited={}\nwhile heap:\n    cost,node=heapq.heappop(heap)\n    if node in visited: continue\n    visited[node]=cost\n    if node==target: return cost\n    for nxt,w in graph[node]:\n        if nxt not in visited: heapq.heappush(heap,(cost+w,nxt))\nreturn float('inf')"
           }
@@ -6582,10 +6415,11 @@
             "rep": [
               1334
             ],
-            "var": [],
+            "var": [
+              2976
+            ],
             "similar": [
-              2976,
-              1761
+              1462
             ],
             "template": "INF=float('inf')\ndist=[[INF]*n for _ in range(n)]\nfor i in range(n): dist[i][i]=0\nfor u,v,w in edges: dist[u][v]=dist[v][u]=min(dist[u][v],w)\nfor k in range(n):\n    for i in range(n):\n        for j in range(n):\n            if dist[i][k]+dist[k][j]<dist[i][j]:\n                dist[i][j]=dist[i][k]+dist[k][j]\n# dist[i][j] = shortest path between all pairs"
           }
@@ -6601,42 +6435,50 @@
             "rep": [
               547
             ],
-            "var": [],
+            "var": [
+              947
+            ],
             "similar": [
               1971,
+              2421,
+              1615,
               2316,
               1267,
-              803,
-              924,
-              928,
-              947,
-              1391,
-              1615,
-              1998,
-              2334,
-              2371,
-              2382,
-              2424,
               2492,
+              924,
               2503,
-              2573,
-              2617,
+              1391,
+              2948,
               2658,
               2709,
-              2782,
-              2852,
-              2948,
-              3235,
-              3383,
-              3493,
-              3532,
-              3607,
-              3613,
-              3695,
-              3710,
-              2421
+              928
             ],
             "template": "parent=list(range(n)); rank=[0]*n\ndef find(x): parent[x]=find(parent[x]) if parent[x]!=x else x; return parent[x]\ndef union(a,b):\n    a,b=find(a),find(b)\n    if a==b: return False\n    if rank[a]<rank[b]: a,b=b,a\n    parent[b]=a\n    if rank[a]==rank[b]: rank[a]+=1\n    return True\n\ncomponents=n\nfor i in range(n):\n    for j in range(i+1,n):\n        if isConnected[i][j] and union(i,j): components-=1\nreturn components"
+          },
+          {
+            "idea": "DSU Advanced / Contest Variants",
+            "insight": "DSU applied to threshold queries, segment removal, sorted-edge scans, custom rank.",
+            "rep": [
+              2334
+            ],
+            "var": [],
+            "similar": [
+              1998,
+              3607,
+              2382,
+              2573,
+              2617,
+              2424,
+              2371,
+              3613,
+              3235,
+              3532,
+              3493,
+              3710,
+              2852,
+              3695
+            ],
+            "template": "# Variations of DSU: process queries offline, maintain rank per component, etc.\n# Same core DSU skeleton; the 'trick' is the orchestration around it."
           },
           {
             "idea": "Key-Merge DSU / Accounts Merge",
@@ -6649,9 +6491,10 @@
               1258
             ],
             "similar": [
-              1061,
+              839,
               2157,
               1632,
+              1061,
               737
             ],
             "template": "from collections import defaultdict\nparent={}\ndef find(x): parent.setdefault(x,x); parent[x]=find(parent[x]); return parent[x]\ndef union(a,b): parent[find(a)]=find(b)\n\nfor name,*emails in accounts:\n    for e in emails: union(emails[0],e)\n\ngroups=defaultdict(list)\nfor name,*emails in accounts:\n    root=find(emails[0])\n    for e in emails: groups[root].append((name,e))\nreturn [[name]+sorted(set(e for _,e in v)) for root,(name,_) in ... ]"
@@ -6662,14 +6505,15 @@
             "rep": [
               399
             ],
-            "var": [],
+            "var": [
+              2307
+            ],
             "similar": [
-              128,
-              1722,
-              2307,
               2612,
               3108,
-              3666
+              3666,
+              1722,
+              128
             ],
             "template": "parent={}; weight={}   # weight[x] = x / parent[x]\ndef find(x):\n    if parent.get(x,x)==x: parent[x]=x; weight[x]=1.0; return x\n    root=find(parent[x]); weight[x]*=weight[parent[x]]; parent[x]=root\n    return root\ndef union(a,b,ratio):\n    ra,wa=find(a),weight[a]; rb,wb=find(b),weight[b]\n    if ra==rb: return\n    parent[ra]=rb; weight[ra]=ratio*wb/wa\n\nfor [a,b],val in zip(equations,values): union(a,b,val)\n# query a/b = weight[a]/weight[b] if same root, else -1"
           },
@@ -6693,8 +6537,10 @@
               1101
             ],
             "similar": [
+              803,
               2076,
-              1579
+              1579,
+              2092
             ],
             "template": "parent=[-1]*(m*n); rank=[0]*(m*n)\ndef find(x): ...\ndef union(x,y): ...\ncount=0; result=[]\nfor r,c in positions:\n    if parent[r*n+c]!=-1: result.append(count); continue\n    parent[r*n+c]=r*n+c; count+=1\n    for dr,dc in [(-1,0),(1,0),(0,-1),(0,1)]:\n        nr,nc=r+dr,c+dc\n        if 0<=nr<m and 0<=nc<n and parent[nr*n+nc]!=-1:\n            if union(r*n+c,nr*n+nc): count-=1\n    result.append(count)\nreturn result"
           },
@@ -6725,9 +6571,10 @@
             "rep": [
               1168
             ],
-            "var": [],
+            "var": [
+              1489
+            ],
             "similar": [
-              1489,
               1724,
               1697,
               3600,
@@ -6751,12 +6598,8 @@
               886
             ],
             "similar": [
-              1042,
               2493,
-              2002,
-              1820,
-              2077,
-              839
+              1042
             ],
             "template": "from collections import deque\ncolor=[-1]*n\ndef bfs(start):\n    q=deque([start]); color[start]=0\n    while q:\n        u=q.popleft()\n        for v in graph[u]:\n            if color[v]==-1: color[v]=1-color[u]; q.append(v)\n            elif color[v]==color[u]: return False\n    return True\nreturn all(bfs(i) for i in range(n) if color[i]==-1)"
           },
@@ -6813,7 +6656,9 @@
               1568
             ],
             "var": [],
-            "similar": [],
+            "similar": [
+              2556
+            ],
             "template": "disc=[-1]*n; low=[-1]*n; timer=[0]; ap=set()\ndef dfs(u,parent,children=[0]):\n    disc[u]=low[u]=timer[0]; timer[0]+=1; child=0\n    for v in graph[u]:\n        if disc[v]==-1:\n            child+=1; dfs(v,u)\n            low[u]=min(low[u],low[v])\n            if parent==-1 and child>1: ap.add(u)\n            if parent!=-1 and low[v]>=disc[u]: ap.add(u)\n        elif v!=parent: low[u]=min(low[u],disc[v])\n\nfor i in range(n):\n    if disc[i]==-1: dfs(i,-1)\nreturn ap"
           }
         ]
@@ -6833,9 +6678,7 @@
             ],
             "similar": [
               980,
-              1129,
-              388,
-              1858
+              1129
             ],
             "template": "def dfs(node,path):\n    if node==n-1: result.append(path[:]); return\n    for nxt in graph[node]:\n        path.append(nxt); dfs(nxt,path); path.pop()\n\nresult=[]; dfs(0,[0])\nreturn result"
           },
@@ -6883,7 +6726,7 @@
               1215,
               2814,
               3629,
-              2858
+              1654
             ],
             "template": "from collections import deque\n# Implicit graph: nodes are integers, edges are jumps\nsquares=[i*i for i in range(1,int(n**0.5)+1)]\nq=deque([(n,0)]); visited={n}\nwhile q:\n    rem,steps=q.popleft()\n    for sq in squares:\n        nxt=rem-sq\n        if nxt==0: return steps+1\n        if nxt>0 and nxt not in visited:\n            visited.add(nxt); q.append((nxt,steps+1))"
           },
@@ -6912,53 +6755,77 @@
             "template": "# O(n) elimination: if A knows B, A is not celebrity; else B is not\ncandidate=0\nfor i in range(1,n):\n    if knows(candidate,i): candidate=i\n# Verify\nfor i in range(n):\n    if i!=candidate:\n        if knows(candidate,i) or not knows(i,candidate): return -1\nreturn candidate"
           },
           {
-            "idea": "Rule-Based Graph Construction / Mixed Traversal",
-            "insight": "Problem gives rules → construct graph → standard BFS/DFS/Dijkstra.",
+            "idea": "Implicit Graph BFS / Numbers & Bits",
+            "insight": "Implicit edges from numeric or bit-state transitions. BFS finds shortest transformation.",
             "rep": [
-              672
+              967
             ],
             "var": [],
             "similar": [
-              1096,
+              2998,
               3141,
               3283,
-              642,
-              1494,
-              1782,
-              2123,
-              2242,
-              2508,
-              3311,
-              3547,
-              3785,
-              967,
-              1087,
-              1236,
-              1242,
-              1992,
-              2174,
-              2596,
-              2998,
               3568,
-              2039,
-              565,
-              676,
-              1233,
-              1743,
-              2101,
-              2285,
-              2359,
-              2374,
-              2497,
-              2924,
-              3310,
+              2174,
+              1087,
+              1096,
+              2596,
+              1242,
+              1236,
               3387,
               3528,
               3535,
-              3656,
-              1791
+              2039
             ],
-            "template": "from collections import defaultdict,deque\nadj=defaultdict(list)\nfor u,v in edges: adj[u].append(v)  # or adj[v].append(u) for undirected\n\n# BFS/DFS from all relevant starting nodes\nvisited=set()\ndef bfs(start):\n    q=deque([start]); visited.add(start)\n    while q:\n        u=q.popleft()\n        for v in adj[u]:\n            if v not in visited: visited.add(v); q.append(v)"
+            "template": "from collections import deque\n# State = number/bitmask. Edges = valid transformations.\nq=deque([(start,0)]); seen={start}\nwhile q:\n    state,steps=q.popleft()\n    if state==target: return steps\n    for nxt in transitions(state):\n        if nxt not in seen: seen.add(nxt); q.append((nxt,steps+1))\nreturn -1"
+          },
+          {
+            "idea": "Modeled Graph DFS / Component Reach",
+            "insight": "Build adjacency from problem rules, then DFS/UF for component stats and reachability.",
+            "rep": [
+              2101
+            ],
+            "var": [],
+            "similar": [
+              565,
+              1992,
+              2123,
+              2359,
+              1743,
+              1761,
+              1791,
+              2077,
+              3310,
+              1782,
+              3656,
+              3547,
+              2924
+            ],
+            "template": "from collections import defaultdict\nadj=defaultdict(list)\nfor u,v in edges_from_rules: adj[u].append(v); adj[v].append(u)\n\nseen=set()\ndef dfs(u):\n    seen.add(u)\n    for v in adj[u]:\n        if v not in seen: dfs(v)\n# answer = component sizes / reach counts / cycle stats"
+          },
+          {
+            "idea": "Modeled Graph Algorithms / Apps",
+            "insight": "Problem gives rules → construct graph → apply sort/greedy/DP/topo. Heap and trie problems also tagged here.",
+            "rep": [
+              2497
+            ],
+            "var": [],
+            "similar": [
+              1494,
+              2242,
+              2285,
+              2374,
+              2508,
+              3785,
+              672,
+              642,
+              676,
+              1233,
+              1858,
+              388,
+              3311
+            ],
+            "template": "# Rule-based graph: model problem → standard algo (sort, greedy, DP, topo).\n# Some entries are tag-confused (trie, stack) and will be re-placed during their target category audits."
           }
         ]
       },
@@ -6970,19 +6837,23 @@
             "idea": "Max Flow Min Cut / Bipartite Matching",
             "insight": "Ford-Fulkerson with BFS (Edmonds-Karp). Max flow = min cut.",
             "rep": [
-              1349
+              1820
             ],
             "var": [],
-            "similar": [],
+            "similar": [
+              1349
+            ],
             "template": "# Max Bipartite Matching (augmenting paths = simplified max flow)\ndef dfs(u,visited):\n    for v in graph[u]:\n        if v not in visited:\n            visited.add(v)\n            if match[v]==-1 or dfs(match[v],visited):\n                match[v]=u; return True\n    return False\n\nmatch=[-1]*right_nodes; ans=0\nfor u in left_nodes:\n    if dfs(u,set()): ans+=1\nreturn ans"
           },
           {
             "idea": "Grid DAG Memoization / Longest Increasing Path",
             "insight": "DFS with memo. Or topo sort by cell value. Each cell = max(neighbors with smaller val) + 1.",
             "rep": [
+              329
+            ],
+            "var": [
               2328
             ],
-            "var": [],
             "similar": [
               2267
             ],
@@ -6995,8 +6866,8 @@
         "tier": "Standard",
         "subs": [
           {
-            "idea": "Tree Graph Algorithms / All Nodes Distance K",
-            "insight": "Tree as undirected graph: BFS from any node (parent map), UF for path counting, Dijkstra for weighted paths.",
+            "idea": "Tree Distance & Diameter / All Nodes Distance K",
+            "insight": "Tree as undirected graph: BFS from any node (parent map), Dijkstra for weighted paths.",
             "rep": [
               863
             ],
@@ -7004,41 +6875,62 @@
               2385
             ],
             "similar": [
-              582,
-              742,
-              834,
               1245,
+              834,
+              742,
+              582,
               1361,
               1377,
-              1569,
-              1719,
-              1916,
-              2003,
               2096,
-              2246,
-              2368,
+              3203,
+              3241,
+              3787,
+              3372,
+              3373,
+              2858
+            ],
+            "template": "from collections import defaultdict,deque\nadj=defaultdict(list)\ndef build(node,parent):\n    if not node: return\n    if parent: adj[node.val].append(parent.val); adj[parent.val].append(node.val)\n    build(node.left,node); build(node.right,node)\n\nbuild(root,None)\nq=deque([(target.val,0)]); visited={target.val}\nresult=[]\nwhile q:\n    node,d=q.popleft()\n    if d==k: result.append(node); continue\n    for nxt in adj[node]:\n        if nxt not in visited: visited.add(nxt); q.append((nxt,d+1))\nreturn result"
+          },
+          {
+            "idea": "Tree DP / Subtree Aggregation",
+            "insight": "Post-order DFS aggregates subtree statistics (size, sum, max, count) and combines at parent.",
+            "rep": [
+              2477
+            ],
+            "var": [],
+            "similar": [
               2440,
-              2467,
-              2477,
               2479,
               2603,
               2641,
               2646,
-              2846,
               2872,
-              3067,
-              3203,
-              3241,
-              3372,
-              3373,
               3481,
               3558,
               3559,
-              3787,
               3812,
-              3534
+              2246,
+              2467
             ],
-            "template": "from collections import defaultdict,deque\nadj=defaultdict(list)\ndef build(node,parent):\n    if not node: return\n    if parent: adj[node.val].append(parent.val); adj[parent.val].append(node.val)\n    build(node.left,node); build(node.right,node)\n\nbuild(root,None)\nq=deque([(target.val,0)]); visited={target.val}\nresult=[]\nwhile q:\n    node,d=q.popleft()\n    if d==k: result.append(node); continue\n    for nxt in adj[node]:\n        if nxt not in visited: visited.add(nxt); q.append((nxt,d+1))\nreturn result"
+            "template": "# dp[node] = aggregate of dp[children] + contribution of node\ndef dfs(u, parent):\n    res = base_value(u)\n    for v in adj[u]:\n        if v == parent: continue\n        cv = dfs(v, u)\n        res = combine(res, cv)\n    return res\n\ndfs(root, -1)"
+          },
+          {
+            "idea": "Tree Construction & Queries / Reconstruct Tree",
+            "insight": "Build/validate tree from constraints, answer offline queries on subtrees or paths.",
+            "rep": [
+              1719
+            ],
+            "var": [],
+            "similar": [
+              1569,
+              1916,
+              2003,
+              2368,
+              3067,
+              3534,
+              2846
+            ],
+            "template": "# Approach varies: degree counting, hash-based pair check, offline LCA queries, BIT on tree.\n# Common: validate adjacency consistency, then reconstruct or answer queries."
           }
         ]
       }
@@ -7062,6 +6954,7 @@
               145
             ],
             "similar": [
+              1305,
               589,
               590,
               606
@@ -7147,10 +7040,11 @@
               99
             ],
             "var": [
-              538,
+              538
+            ],
+            "similar": [
               1038
             ],
-            "similar": [],
             "template": "def morrisInorder(root):\n    res = []; cur = root\n    while cur:\n        if not cur.left:\n            res.append(cur.val); cur = cur.right\n        else:\n            # Find inorder predecessor\n            prev = cur.left\n            while prev.right and prev.right is not cur:\n                prev = prev.right\n            if not prev.right:\n                prev.right = cur    # create thread\n                cur = cur.left\n            else:\n                prev.right = None   # remove thread\n                res.append(cur.val)\n                cur = cur.right\n    return res"
           }
         ]
@@ -7358,8 +7252,7 @@
               108
             ],
             "var": [
-              109,
-              1008
+              109
             ],
             "similar": [],
             "template": "def sortedArrayToBST(nums):\n    def build(l, r):\n        if l > r: return None\n        mid = (l + r) // 2\n        node = TreeNode(nums[mid])\n        node.left  = build(l, mid - 1)\n        node.right = build(mid + 1, r)\n        return node\n    return build(0, len(nums) - 1)\n\ndef sortedListToBST(head):\n    # Find middle via slow/fast pointers\n    def find_mid(l, r):\n        slow = fast = l\n        while fast is not r and fast.next is not r:\n            slow = slow.next; fast = fast.next.next\n        return slow\n    def build(l, r):\n        if l is r: return None\n        mid = find_mid(l, r)\n        node = TreeNode(mid.val)\n        node.left  = build(l, mid)\n        node.right = build(mid.next, r)\n        return node\n    return build(head, None)"
@@ -7368,10 +7261,12 @@
             "idea": "Upper Bound Decode / BST from Preorder",
             "insight": "Maintain stack of ancestors; pop while next val > top; insert as right child of last popped",
             "rep": [
-              536
+              1008
             ],
             "var": [],
-            "similar": [],
+            "similar": [
+              536
+            ],
             "template": "def bstFromPreorder(preorder):\n    root = TreeNode(preorder[0])\n    stack = [root]\n    for val in preorder[1:]:\n        node = TreeNode(val)\n        if val < stack[-1].val:\n            stack[-1].left = node\n        else:\n            parent = stack[-1]\n            while stack and stack[-1].val < val:\n                parent = stack.pop()\n            parent.right = node\n        stack.append(node)\n    return root"
           },
           {
@@ -7595,10 +7490,10 @@
             "rep": [
               865
             ],
-            "var": [
+            "var": [],
+            "similar": [
               1123
             ],
-            "similar": [],
             "template": "def lcaDeepestLeaves(root):\n    def dfs(node):\n        if not node: return node, 0\n        l_node, l_dep = dfs(node.left)\n        r_node, r_dep = dfs(node.right)\n        if l_dep == r_dep:   return node, l_dep + 1\n        if l_dep > r_dep:    return l_node, l_dep + 1\n        return r_node, r_dep + 1\n    return dfs(root)[0]"
           }
         ]
@@ -7637,9 +7532,7 @@
             "rep": [
               450
             ],
-            "var": [
-              669
-            ],
+            "var": [],
             "similar": [],
             "template": "def deleteNode(root, key):\n    if not root: return None\n    if key < root.val:\n        root.left  = deleteNode(root.left,  key)\n    elif key > root.val:\n        root.right = deleteNode(root.right, key)\n    else:\n        if not root.left:  return root.right\n        if not root.right: return root.left\n        # Find inorder successor (leftmost of right subtree)\n        succ = root.right\n        while succ.left: succ = succ.left\n        root.val   = succ.val\n        root.right = deleteNode(root.right, succ.val)\n    return root"
           },
@@ -7647,9 +7540,11 @@
             "idea": "Recursive Trim / Trim BST",
             "insight": "If root.val < lo return trim(right); if root.val > hi return trim(left); else recurse both",
             "rep": [
+              669
+            ],
+            "var": [
               776
             ],
-            "var": [],
             "similar": [
               1382
             ],
@@ -8154,9 +8049,11 @@
             "idea": "Encode Decode N-ary / Binary Conversion",
             "insight": "Encode: first child → left; next sibling → right; decode is the reverse",
             "rep": [
+              431
+            ],
+            "var": [
               1516
             ],
-            "var": [],
             "similar": [],
             "template": "# Encode N-ary tree as binary: left=first child, right=next sibling\ndef encode(root):\n    if not root: return None\n    node = TreeNode(root.val)\n    if root.children:\n        node.left = encode(root.children[0])\n    cur = node.left\n    for child in root.children[1:]:\n        cur.right = encode(child)\n        cur = cur.right\n    return node\n\ndef decode(root):\n    if not root: return None\n    node = Node(root.val, [])\n    cur = root.left\n    while cur:\n        node.children.append(decode(cur))\n        cur = cur.right\n    return node"
           },
@@ -8804,20 +8701,20 @@
               215
             ],
             "var": [
-              703,
               1985
             ],
             "similar": [
-              973,
+              2679,
+              3462,
               506,
               1464,
               2099,
               2500,
               1337,
               1086,
-              2679,
               3264,
-              3462
+              2551,
+              3275
             ],
             "template": "import heapq\nheap = []\nfor x in nums:\n    heapq.heappush(heap, x)\n    if len(heap) > k: heapq.heappop(heap)\nreturn heap[0]  # smallest in heap = kth largest overall\n# heapq.nlargest(k, nums)[-1] also works but O(n log k)"
           },
@@ -8843,16 +8740,12 @@
             "idea": "K-Closest Heap / K Closest Points",
             "insight": "Max-heap of size K (or min-heap expanding from smallest). Distance as key.",
             "rep": [
-              658
+              973
             ],
-            "var": [
-              373
-            ],
+            "var": [],
             "similar": [
-              378,
-              786,
-              1439,
-              2343
+              2343,
+              658
             ],
             "template": "import heapq\n# Max-heap of size k (negate key for min-heap)\nheap = []\nfor x, y in points:\n    d = x*x + y*y\n    heapq.heappush(heap, (-d, x, y))\n    if len(heap) > k: heapq.heappop(heap)\nreturn [[x,y] for _,x,y in heap]\n# Or: heapq.nsmallest(k, points, key=lambda p: p[0]**2+p[1]**2)"
           },
@@ -8860,9 +8753,11 @@
             "idea": "Online Top-K Tracking / Kth Largest Stream",
             "insight": "Min-heap of size K maintained across inserts. Top always = Kth largest.",
             "rep": [
+              703
+            ],
+            "var": [
               2102
             ],
-            "var": [],
             "similar": [
               1738,
               2342
@@ -8885,9 +8780,10 @@
               632
             ],
             "similar": [
+              2931,
+              759,
               355,
-              1424,
-              2931
+              1424
             ],
             "template": "import heapq\nheap = [(l.val, i, l) for i, l in enumerate(lists) if l]\nheapq.heapify(heap)\ndummy = curr = ListNode(0)\nwhile heap:\n    val, i, node = heapq.heappop(heap)\n    curr.next = node; curr = curr.next\n    if node.next: heapq.heappush(heap, (node.next.val, i, node.next))\nreturn dummy.next"
           },
@@ -8895,10 +8791,18 @@
             "idea": "K-Sum Merge Heap / K-Sum of Array",
             "insight": "Min-heap expands from smallest combination. Pop, push neighbors. Visited set.",
             "rep": [
+              373
+            ],
+            "var": [
               2386
             ],
-            "var": [],
-            "similar": [],
+            "similar": [
+              1439,
+              378,
+              786,
+              264,
+              313
+            ],
             "template": "import heapq\n# 2386: kth largest subset sum\nmax_sum = sum(x for x in nums if x > 0)\nnums = sorted(abs(x) for x in nums)          # sort by |value|\nheap = [(nums[0], 0)]                         # (reduction_from_max, last_idx)\nfor _ in range(k - 1):\n    r, i = heapq.heappop(heap)\n    if i + 1 < len(nums):\n        heapq.heappush(heap, (r - nums[i] + nums[i+1], i+1))  # replace i with i+1\n        heapq.heappush(heap, (r + nums[i+1], i+1))             # additionally take i+1\nreturn max_sum - heapq.heappop(heap)[0]\n# Invariant: heap[0] = kth smallest reduction from max_sum"
           }
         ]
@@ -8928,9 +8832,7 @@
             "rep": [
               2163
             ],
-            "var": [
-              2551
-            ],
+            "var": [],
             "similar": [
               3013
             ],
@@ -8955,7 +8857,9 @@
             "similar": [
               1054,
               1405,
-              2182
+              2182,
+              984,
+              3081
             ],
             "template": "from collections import Counter\nimport heapq\nheap = [-c for c in Counter(tasks).values()]\nheapq.heapify(heap)\ntime = 0\nwhile heap:\n    slot = []; i = 0\n    while i <= n:   # fill one cooling window of n+1 slots\n        if heap: slot.append(-heapq.heappop(heap))\n        i += 1\n    for f in slot:\n        if f > 1: heapq.heappush(heap, -(f-1))\n    time += n+1 if heap else len(slot)\nreturn time"
           },
@@ -8969,7 +8873,6 @@
               1383
             ],
             "similar": [
-              502,
               2462,
               3476,
               3478,
@@ -8992,10 +8895,13 @@
             "idea": "Greedy Unlock Heap / Refueling Stops",
             "insight": "Sort projects by capital. Min-heap of available. Pop from max-heap of profits.",
             "rep": [
+              502
+            ],
+            "var": [
               871
             ],
-            "var": [],
             "similar": [
+              630,
               1642
             ],
             "template": "import heapq\nheap = []; fuel = startFuel; stops = 0; prev = 0\nfor loc, f in sorted(stations) + [(target, 0)]:\n    fuel -= loc - prev; prev = loc\n    while heap and fuel < 0:\n        fuel += -heapq.heappop(heap); stops += 1\n    if fuel < 0: return -1\n    heapq.heappush(heap, -f)\nreturn stops"
@@ -9016,27 +8922,17 @@
               1962
             ],
             "similar": [
-              2558,
+              3266,
+              1354,
               2530,
               3066,
               2233,
-              3266
+              1753,
+              2335,
+              1046,
+              2558
             ],
             "template": "import heapq\nheap = [-x for x in nums]; heapq.heapify(heap)\ntarget = sum(nums) / 2; removed = ops = 0\nwhile removed < target:\n    x = -heapq.heappop(heap)\n    removed += x / 2; heapq.heappush(heap, -x/2); ops += 1\nreturn ops"
-          },
-          {
-            "idea": "Constrained Construction Heap / Happy String",
-            "insight": "Max-heap of (count, char). Greedily pick most frequent that doesn't violate.",
-            "rep": [
-              984
-            ],
-            "var": [],
-            "similar": [
-              2335,
-              1753,
-              3081
-            ],
-            "template": "from collections import Counter\nimport heapq\nheap = [(-v, k) for k, v in Counter(s).items()]\nheapq.heapify(heap)\nresult = []\nwhile heap:\n    c1, ch1 = heapq.heappop(heap)\n    if result and result[-1] == ch1:\n        if not heap: break\n        c2, ch2 = heapq.heappop(heap)\n        result.append(ch2)\n        if c2+1: heapq.heappush(heap, (c2+1, ch2))\n        heapq.heappush(heap, (c1, ch1))\n    else:\n        result.append(ch1)\n        if c1+1: heapq.heappush(heap, (c1+1, ch1))\nreturn \"\".join(result)"
           },
           {
             "idea": "Fractional Gain Heap / Max Pass Ratio",
@@ -9066,9 +8962,9 @@
               2402
             ],
             "similar": [
+              1606,
               1353,
               2406,
-              1606,
               1882,
               1834,
               1942
@@ -9134,22 +9030,10 @@
               1199
             ],
             "similar": [
-              3507,
-              3510
+              3510,
+              3507
             ],
             "template": "import heapq\nheapq.heapify(sticks)\ncost = 0\nwhile len(sticks) > 1:\n    a = heapq.heappop(sticks)\n    b = heapq.heappop(sticks)\n    cost += a + b\n    heapq.heappush(sticks, a + b)\nreturn cost\n# Greedy correctness: always merge two smallest to minimize total cost"
-          },
-          {
-            "idea": "Multi-Source Min-Heap / Ugly Number II",
-            "insight": "Min-heap generates candidates in order. Pop smallest, push its multiples.",
-            "rep": [
-              264
-            ],
-            "var": [
-              313
-            ],
-            "similar": [],
-            "template": "import heapq\nheap = [1]; seen = {1}\nfor _ in range(n):\n    x = heapq.heappop(heap)\n    for p in [2, 3, 5]:\n        if x*p not in seen: seen.add(x*p); heapq.heappush(heap, x*p)\nreturn x\n# Alternative: 3-pointer DP (no heap needed)\n# dp[i] = min(dp[p2]*2, dp[p3]*3, dp[p5]*5); advance smallest pointer"
           }
         ]
       },
@@ -9165,14 +9049,8 @@
             ],
             "var": [],
             "similar": [
-              1488,
-              2034,
-              2349,
-              2353,
-              2336,
-              1845,
-              3408,
-              3815
+              855,
+              1488
             ],
             "template": "import heapq\n# Lazy deletion: mark invalid entries, skip on pop\nheap = []\nstale = {}   # val -> count of stale copies\n\ndef push(val): heapq.heappush(heap, val)\ndef pop():\n    while heap:\n        val = heapq.heappop(heap)\n        if stale.get(val, 0) > 0: stale[val] -= 1; continue\n        return val\ndef remove(val): stale[val] = stale.get(val, 0) + 1\n# Application: 1675 Minimize Deviation\n# Make all odd numbers even (×2), then repeatedly pop max, divide by 2 if even"
           },
@@ -9182,11 +9060,20 @@
             "rep": [
               1912
             ],
-            "var": [],
+            "var": [
+              2353
+            ],
             "similar": [
-              1500,
               2254,
-              3391
+              1500,
+              3391,
+              2034,
+              2349,
+              2336,
+              1845,
+              3408,
+              3815,
+              3092
             ],
             "template": "import heapq\nfrom collections import defaultdict\n# Pattern: heap for ordering + dict for O(1) lookup + lazy deletion for updates\nclass FoodRatings:\n    def __init__(self, foods, cuisines, ratings):\n        self.rating = dict(zip(foods, ratings))\n        self.cuisine = dict(zip(foods, cuisines))\n        self.heap = defaultdict(list)\n        for f,c,r in zip(foods,cuisines,ratings):\n            heapq.heappush(self.heap[c], (-r, f))\n    def changeRating(self, food, rating):\n        self.rating[food] = rating  # lazy: old entry stays, will be skipped\n        heapq.heappush(self.heap[self.cuisine[food]], (-rating, food))\n    def highestRated(self, cuisine):\n        h = self.heap[cuisine]\n        while -h[0][0] != self.rating[h[0][1]]: heapq.heappop(h)\n        return h[0][1]"
           },
@@ -9225,7 +9112,9 @@
             "rep": [
               407
             ],
-            "var": [],
+            "var": [
+              778
+            ],
             "similar": [],
             "template": "import heapq\nm, n = len(heightMap), len(heightMap[0])\nheap = []; visited = [[False]*n for _ in range(m)]\nfor r in range(m):\n    for c in [0, n-1]: heapq.heappush(heap,(heightMap[r][c],r,c)); visited[r][c]=True\nfor c in range(n):\n    for r in [0, m-1]: \n        if not visited[r][c]: heapq.heappush(heap,(heightMap[r][c],r,c)); visited[r][c]=True\nwater = 0\nwhile heap:\n    h,r,c = heapq.heappop(heap)\n    for dr,dc in [(-1,0),(1,0),(0,-1),(0,1)]:\n        nr,nc = r+dr,c+dc\n        if 0<=nr<m and 0<=nc<n and not visited[nr][nc]:\n            visited[nr][nc] = True\n            water += max(0, h - heightMap[nr][nc])\n            heapq.heappush(heap, (max(h, heightMap[nr][nc]), nr, nc))\nreturn water"
           }
@@ -9236,62 +9125,90 @@
         "tier": "Bonus",
         "subs": [
           {
-            "idea": "Cross-Ref: Dijkstra / See Graph Pattern",
-            "insight": "Heap used for Dijkstra priority queue. Full solution logic is graph, not heap.",
+            "idea": "Cross-Ref: Standard Dijkstra / See Graph 5.1",
+            "insight": "Heap as priority queue inside classic Dijkstra. Full algorithm is graph shortest-path.",
             "rep": [
               743
             ],
             "var": [
-              787
+              1514
             ],
             "similar": [
-              499,
-              505,
-              675,
-              778,
-              882,
-              1102,
-              1135,
-              1168,
-              1263,
-              1368,
-              1514,
-              1631,
-              1724,
               1786,
-              1810,
-              2093,
               2203,
-              2290,
-              2473,
-              2503,
-              2577,
               2642,
-              2662,
               2699,
-              2714,
               2737,
-              2812,
-              2940,
-              2959,
               3112,
               3123,
-              3286,
-              3296,
               3341,
               3342,
               3377,
-              3594,
               3604,
-              3607,
               3620,
-              3650
+              2959
             ],
-            "template": "# Heap is the core data structure in Dijkstra's algorithm\n# See: Weighted Shortest Path / Dijkstra (Graph pattern)\nimport heapq\ndist = {node: float('inf') for node in graph}; dist[src] = 0\nheap = [(0, src)]\nwhile heap:\n    d, u = heapq.heappop(heap)\n    if d > dist[u]: continue\n    for v, w in graph[u]:\n        if dist[u]+w < dist[v]: dist[v]=dist[u]+w; heapq.heappush(heap,(dist[v],v))"
+            "template": "# Heap is the PQ inside Dijkstra. See graph.buckets[4].subs[0] (Classic Dijkstra)\nimport heapq\ndist = {node: float('inf') for node in graph}; dist[src] = 0\nheap = [(0, src)]\nwhile heap:\n    d, u = heapq.heappop(heap)\n    if d > dist[u]: continue\n    for v, w in graph[u]:\n        if dist[u]+w < dist[v]: dist[v]=dist[u]+w; heapq.heappush(heap,(dist[v],v))"
+          },
+          {
+            "idea": "Cross-Ref: Grid Dijkstra / See Graph 5.2",
+            "insight": "Heap as PQ for grid Dijkstra (priority = max-of-path-effort, min-of-path-min, etc.).",
+            "rep": [
+              1631
+            ],
+            "var": [
+              778
+            ],
+            "similar": [
+              1102,
+              499,
+              505,
+              1263,
+              1368,
+              1810,
+              2290,
+              2503,
+              2577,
+              2812,
+              3286,
+              675
+            ],
+            "template": "# See graph.buckets[4].subs[1] (Grid Dijkstra)"
+          },
+          {
+            "idea": "Cross-Ref: State Dijkstra / See Graph 5.3",
+            "insight": "Heap as PQ with state-augmented nodes (k-stops, discounts, etc.).",
+            "rep": [
+              787
+            ],
+            "var": [],
+            "similar": [
+              2093,
+              2662,
+              2714
+            ],
+            "template": "# See graph.buckets[4].subs[2] (Layered State Dijkstra)"
+          },
+          {
+            "idea": "Cross-Ref: Min-Cost Dijkstra & MST / See Graph 5.4, 7.6, 8.1",
+            "insight": "Heap inside Dijkstra variants (subdivisions, edge reversals) and Kruskal/Prim's MST.",
+            "rep": [
+              882
+            ],
+            "var": [],
+            "similar": [
+              2473,
+              3650,
+              1135,
+              1168,
+              1724,
+              3594
+            ],
+            "template": "# See graph.buckets[4].subs[3] (Min-Cost Dijkstra), buckets[6].subs[5] (Kruskal MST), buckets[7] (Advanced MST)"
           },
           {
             "idea": "Cross-Ref: Mono Deque DP / See Stack Pattern",
-            "insight": "Heap/deque used inside DP transitions. Core logic is DP.",
+            "insight": "Heap/deque optimizes DP transitions over a sliding window of states. Core logic is DP.",
             "rep": [
               1425
             ],
@@ -9309,16 +9226,120 @@
               2762,
               2944,
               2969,
-              2945,
               3505,
               3422,
               3691
             ],
-            "template": "# Heap/deque used to optimize DP transitions\n# See: Sliding Window Extrema / Mono Deque (Stack pattern)\nfrom collections import deque\n# Sliding window max using deque (monotone decreasing)\ndq = deque()\nfor i, x in enumerate(nums):\n    while dq and nums[dq[-1]] <= x: dq.pop()\n    dq.append(i)\n    if dq[0] <= i-k: dq.popleft()\n    if i >= k-1: result.append(nums[dq[0]])"
+            "template": "# See stack pattern (Sliding Window Extrema / Mono Deque). Heap is alternative to deque.\nfrom collections import deque\ndq = deque()\nfor i, x in enumerate(nums):\n    while dq and nums[dq[-1]] <= x: dq.pop()\n    dq.append(i)\n    if dq[0] <= i-k: dq.popleft()\n    if i >= k-1: result.append(nums[dq[0]])"
           },
           {
-            "idea": "Cross-Ref: Remaining Heap Uses / Misc",
-            "insight": "Unique combos: heap + binary search, heap + tree, contest problems.",
+            "idea": "Cross-Ref: Monotonic Stack / See Stack Pattern",
+            "insight": "Heap as alternative to monotonic stack/queue for sliding extrema and next-greater problems.",
+            "rep": [
+              239
+            ],
+            "var": [],
+            "similar": [
+              1776,
+              1966,
+              2289,
+              2444,
+              2863,
+              2866,
+              3205,
+              3221,
+              3229,
+              3523,
+              3555,
+              3638,
+              3676,
+              3835
+            ],
+            "template": "# Canonical: monotonic stack/deque. Heap works but is O(n log n) vs O(n).\n# See stack pattern."
+          },
+          {
+            "idea": "Cross-Ref: Sort + Greedy / See Greedy Pattern",
+            "insight": "Sort by one criterion then greedy pick (heap as auxiliary). Canonical: greedy after sort.",
+            "rep": [
+              1057
+            ],
+            "var": [],
+            "similar": [
+              2611,
+              3049,
+              2285,
+              2497,
+              1878,
+              3763,
+              3780,
+              3781,
+              2974,
+              1686,
+              2407,
+              1183,
+              2263,
+              2333
+            ],
+            "template": "# Canonical: sort + linear pick. Heap can replace heap-of-K but greedy sort is the teaching point.\n# See greedy pattern."
+          },
+          {
+            "idea": "Cross-Ref: Sliding Window / See Two-Pointers Pattern",
+            "insight": "Sliding window with heap/sorted-set for window extrema or top-K.",
+            "rep": [
+              1094
+            ],
+            "var": [],
+            "similar": [
+              3318,
+              3321,
+              3578,
+              3589
+            ],
+            "template": "# See two-pointers pattern (sliding window). Heap orders elements within the window."
+          },
+          {
+            "idea": "Cross-Ref: Trees / See Trees Pattern",
+            "insight": "Tree/BST traversal where heap orders K-best results.",
+            "rep": [
+              272
+            ],
+            "var": [],
+            "similar": [
+              2973
+            ],
+            "template": "# See trees pattern. Heap is incidental ordering tool."
+          },
+          {
+            "idea": "Cross-Ref: Trie/String / See Trie-String Pattern",
+            "insight": "Trie-based string problems where heap orders top-K suggestions or XOR pairs.",
+            "rep": [
+              642
+            ],
+            "var": [],
+            "similar": [
+              1268,
+              3845
+            ],
+            "template": "# See trie-string pattern. Heap selects top-K from trie traversal."
+          },
+          {
+            "idea": "Cross-Ref: DP / See DP Pattern",
+            "insight": "DP problems where heap selects best candidates or simulates non-DP greedy.",
+            "rep": [
+              488
+            ],
+            "var": [],
+            "similar": [
+              1388,
+              912,
+              2945,
+              3826
+            ],
+            "template": "# See DP pattern. Heap is auxiliary; DP transitions are the core."
+          },
+          {
+            "idea": "Cross-Ref: Misc Heap Uses / Catch-All",
+            "insight": "Heap + binary search, heap + design, contest combos. True misc.",
             "rep": [
               420
             ],
@@ -9326,66 +9347,19 @@
               659
             ],
             "similar": [
-              272,
               332,
-              488,
-              642,
               683,
-              855,
-              912,
-              1057,
-              1094,
-              1183,
-              1268,
-              1354,
-              1388,
-              1776,
-              1966,
-              2263,
-              2285,
-              2289,
-              2333,
+              1172,
+              2146,
+              2940,
+              3296,
+              3607,
+              2231,
               2344,
               2357,
-              2407,
-              2444,
-              2497,
-              2611,
-              2863,
-              2866,
-              2973,
-              3049,
               3170,
-              3205,
-              3221,
-              3229,
-              3275,
-              3318,
-              3321,
               3362,
-              3523,
-              3555,
-              3578,
-              3589,
-              3638,
-              3676,
-              3746,
-              3763,
-              3780,
-              3781,
-              3826,
-              3835,
-              3845,
-              239,
-              630,
-              1046,
-              1172,
-              1686,
-              1878,
-              2146,
-              2231,
-              2974,
-              3092
+              3746
             ],
             "template": "# Heap as general-purpose ordered container for varied problems\n# Common patterns:\n# 1. Max-heap: heapq with negated values  (-x for max)\n# 2. Tie-breaking: (priority, secondary_key, item)\n# 3. Custom comparator: use functools.cmp_to_key\n# 4. heapq.nlargest(k, iterable) / heapq.nsmallest(k, iterable)\n# 5. heapq.heapreplace(h, item) = pop+push in one O(log n) op"
           }
