@@ -31,7 +31,14 @@ export default function ProblemRow({ n, problems, role, isDone, getNote, hasTag,
         onChange={e => setDone(n, e.target.checked)}
       />
       <span className="pl">
-        <a href={`https://leetcode.com/problems/${p.slug}/`} target="_blank" rel="noopener">
+        <a
+          href={p.isPaidOnly
+            ? `https://algo.monster/liteproblems/${n}`
+            : `https://leetcode.com/problems/${p.slug}/`}
+          target="_blank"
+          rel="noopener"
+          title={p.isPaidOnly ? 'Premium problem — opens on algo.monster' : undefined}
+        >
           {n}. {p.name}
         </a>
         {isBad && <span className="bad-mark" title="Low community rating — may not be worth solving">⚠</span>}

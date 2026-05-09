@@ -15,7 +15,10 @@
       "Read(//tmp/**)",
       "Read(//Users/devkinandanmalav/**)",
       "Bash(node scripts/probe-likes.mjs)",
-      "Bash(node scripts/fetch-likes.mjs)"
+      "Bash(node scripts/fetch-likes.mjs)",
+      "Bash(xxd)",
+      "Bash(node scripts/fix-slugs.mjs)",
+      "Bash(grep -E \"\\\\.tsx?$|\\\\.jsx?$\")"
     ],
     "additionalDirectories": [
       "/Users/devkinandanmalav/Documents/leetcode-patterns/e2e"

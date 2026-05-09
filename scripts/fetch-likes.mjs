@@ -7,9 +7,14 @@ const MAX_RETRIES   = 5;
 
 const problems = JSON.parse(await readFile(PROBLEMS_PATH, 'utf8'));
 
+// slug → question number, used to map LeetCode similarQuestions (which
+// reference titleSlug) into our numeric-keyed schema.
+const slugToNum = {};
+for (const [n, p] of Object.entries(problems)) slugToNum[p.slug] = Number(n);
+
 async function fetchBatch(entries, attempt = 1) {
   const body = `query {\n${entries.map(([n, p]) =>
-    `  q${n}: question(titleSlug:"${p.slug}"){ likes dislikes acRate }`
+    `  q${n}: question(titleSlug:"${p.slug}"){ likes dislikes acRate isPaidOnly topicTags{slug} similarQuestions }`
   ).join('\n')}\n}`;
 
   const res = await fetch('https://leetcode.com/graphql', {
@@ -39,7 +44,16 @@ async function fetchBatch(entries, attempt = 1) {
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 const allEntries = Object.entries(problems);
-const todo = allEntries.filter(([, p]) => typeof p.acRate !== 'number');
+// Resume rule: a problem is "done" when we have isPaidOnly + tags + similar,
+// AND (it's premium OR we have engagement stats). Premium-locked problems
+// expose metadata but no likes/acRate, so we don't keep retrying them.
+const todo = allEntries.filter(([, p]) => {
+  if (typeof p.isPaidOnly !== 'boolean') return true;
+  if (!Array.isArray(p.tags))            return true;
+  if (!Array.isArray(p.similar))         return true;
+  if (p.isPaidOnly)                      return false;
+  return typeof p.acRate !== 'number';
+});
 
 console.log(`total: ${allEntries.length} · already done: ${allEntries.length - todo.length} · todo: ${todo.length}`);
 if (!todo.length) { console.log('nothing to fetch.'); process.exit(0); }
@@ -54,7 +68,27 @@ for (let i = 0; i < batches; i++) {
 
   for (const [n] of slice) {
     const v = data[`q${n}`];
-    if (v && typeof v.likes === 'number') {
+    if (!v) { missing++; continue; }
+
+    // Always-available metadata — populate even when engagement stats are
+    // gated (premium problems return null likes but expose tags/similar).
+    if (typeof v.isPaidOnly === 'boolean') problems[n].isPaidOnly = v.isPaidOnly;
+    if (Array.isArray(v.topicTags))        problems[n].tags = v.topicTags.map(t => t.slug);
+
+    // similarQuestions is a JSON-encoded string of {title, titleSlug, difficulty}.
+    // Map titleSlug → question number via slugToNum; drop unmapped entries.
+    let sim = [];
+    if (typeof v.similarQuestions === 'string') {
+      try {
+        const parsed = JSON.parse(v.similarQuestions);
+        if (Array.isArray(parsed)) {
+          sim = parsed.map(q => slugToNum[q.titleSlug]).filter(x => typeof x === 'number');
+        }
+      } catch { /* malformed — leave empty */ }
+    }
+    problems[n].similar = sim;
+
+    if (typeof v.likes === 'number') {
       problems[n].likes    = v.likes;
       problems[n].dislikes = v.dislikes;
       problems[n].acRate   = Math.round(v.acRate * 10) / 10; // 1 decimal
