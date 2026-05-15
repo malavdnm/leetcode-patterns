@@ -6,6 +6,7 @@ export function useFilters() {
   const [repOnly,       setRepOnly]       = useState(false);
   const [redoOnly,      setRedoOnly]      = useState(false);
   const [companyFilter, setCompanyFilter] = useState(new Set());
+  const [companyMode,   setCompanyMode]   = useState('OR'); // 'OR' = union, 'AND' = intersection
   const [search,        setSearch]        = useState('');
 
   const toggleDiff = (d) => setDiffFilter(prev => {
@@ -20,12 +21,15 @@ export function useFilters() {
     return next;
   });
 
+  const clearCompanies = () => setCompanyFilter(new Set());
+
   return {
     diffFilter,    toggleDiff,
     showUnsolved,  setShowUnsolved,
     repOnly,       setRepOnly,
     redoOnly,      setRedoOnly,
-    companyFilter, toggleCompany,
+    companyFilter, toggleCompany, clearCompanies,
+    companyMode,   setCompanyMode,
     search,        setSearch,
   };
 }

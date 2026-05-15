@@ -6,8 +6,11 @@ export function problemVisible(n, problems, filters, isDone, hasTag, companySets
   if (filters.showUnsolved && isDone(n)) return false;
   if (filters.redoOnly && !hasTag(n, 'redo')) return false;
   if (filters.companyFilter.size > 0) {
-    const inAny = [...filters.companyFilter].some(k => companySets[k]?.has(n));
-    if (!inAny) return false;
+    const keys = [...filters.companyFilter];
+    const match = filters.companyMode === 'AND'
+      ? keys.every(k => companySets[k]?.has(n))
+      : keys.some(k => companySets[k]?.has(n));
+    if (!match) return false;
   }
   return true;
 }
