@@ -1,6 +1,7 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import problems from './data/problems.json';
 import companiesData from './data/companies.json';
+import { buildPlacementIndex } from './utils/placements';
 
 import { usePatterns } from './hooks/usePatterns';
 import { useProgress } from './hooks/useProgress';
@@ -25,6 +26,7 @@ const companySets = Object.fromEntries(
 
 export default function App() {
   const [curPat, setCurPat] = useState('dp');
+  const [openByPat, setOpenByPat] = useState({});
   const [tplSub, setTplSub] = useState(null);
   const [moveItem, setMoveItem] = useState(null);
   const [navTarget, setNavTarget] = useState(null);
@@ -66,11 +68,14 @@ export default function App() {
   const handleNavigate = useCallback((hit) => {
     filters.setSearch('');
     handleSwitch(hit.k, hit.col);
+    setOpenByPat(m => ({ ...m, [hit.k]: hit.bi }));
     setNavTarget({ bi: hit.bi, si: hit.si, ts: Date.now() });
     setTimeout(() => setNavTarget(null), 2000);
   }, [handleSwitch, filters]);
 
   const pat = patterns[curPat];
+  const openBi = openByPat[curPat] ?? null;
+  const placements = useMemo(() => buildPlacementIndex(patterns), [patterns]);
 
   // Any logged-in user can open the modal (admins apply directly, others submit a request)
   const handleApprove = useCallback((req) => {
@@ -86,6 +91,8 @@ export default function App() {
     companySets,
     onOpenTemplate: setTplSub,
     onOpenMove: user ? setMoveItem : null,
+    placements,
+    onNavigate: handleNavigate,
   };
 
   return (
@@ -149,6 +156,7 @@ export default function App() {
             <GlobalSearch
               num={searchNum}
               problems={problems}
+              placements={placements}
               onNavigate={handleNavigate}
             />
           ) : (
@@ -157,7 +165,8 @@ export default function App() {
                 key={bi}
                 bucket={bucket}
                 bi={bi}
-                forceOpen={navTarget?.bi === bi}
+                open={openBi === bi}
+                onToggle={() => setOpenByPat(m => ({ ...m, [curPat]: m[curPat] === bi ? null : bi }))}
                 scrollToSub={navTarget?.bi === bi ? navTarget.si : null}
                 {...bucketProps}
               />

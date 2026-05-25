@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ProblemRow from './ProblemRow';
 import { countVisible } from '../utils/filter';
 
-export default function SubIdea({ sub, bi, si, patKey, problems, filters, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets, onOpenTemplate, onOpenMove, isOpen }) {
+export default function SubIdea({ sub, bi, si, patKey, problems, filters, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets, onOpenTemplate, onOpenMove, placements, onNavigate, isOpen }) {
   const [showVar, setShowVar] = useState(false);
   const [showSim, setShowSim] = useState(false);
 
@@ -19,7 +19,7 @@ export default function SubIdea({ sub, bi, si, patKey, problems, filters, isDone
   const open = isOpen || !!filters.search;
 
   const makeMove = onOpenMove ? (role) => (n) => onOpenMove({ num: n, patKey, bi, si, role }) : null;
-  const rowProps = { problems, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets };
+  const rowProps = { problems, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets, placements, onNavigate, patKey, bi, si };
 
   return (
     <div id={`sub-${bi}-${si}`} className="sub">

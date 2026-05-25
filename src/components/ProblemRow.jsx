@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import companies from '../data/companies.json';
 import solutionsIndex from '../data/solutionsIndex.js';
 
@@ -11,12 +12,27 @@ function fmtCount(n) {
   return String(n);
 }
 
-export default function ProblemRow({ n, problems, role, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets, onOpenMove }) {
+export default function ProblemRow({ n, problems, role, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets, onOpenMove, placements, onNavigate, patKey, bi, si }) {
+  const [xrefOpen, setXrefOpen] = useState(false);
+  const xrefRef = useRef(null);
+
+  useEffect(() => {
+    if (!xrefOpen) return;
+    const close = (e) => { if (!xrefRef.current?.contains(e.target)) setXrefOpen(false); };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
+  }, [xrefOpen]);
+
   const p = problems[String(n)];
   if (!p) return null;
   const done = isDone(n);
 
   const canMove = typeof onOpenMove === 'function';
+
+  // Other sub-buckets this problem appears in (excluding the one rendering it).
+  const elsewhere = (placements?.get(n) || []).filter(
+    pl => !(pl.k === patKey && pl.bi === bi && pl.si === si)
+  );
 
   const ratio = typeof p.likes === 'number' && (p.likes + p.dislikes) > 0
     ? Math.round((p.likes / (p.likes + p.dislikes)) * 100)
@@ -64,6 +80,38 @@ export default function ProblemRow({ n, problems, role, isDone, getNote, hasTag,
           </span>
         ) : (
           <span className={`db d${p.diff}`}>{DIFF_LABEL[p.diff] || p.diff}</span>
+        )}
+        {elsewhere.length > 0 && (
+          <span className="xref-host" ref={xrefRef}>
+            <button
+              className="xref"
+              onClick={e => { e.stopPropagation(); setXrefOpen(o => !o); }}
+              title={`Also in ${elsewhere.length} other place${elsewhere.length !== 1 ? 's' : ''}`}
+            >
+              ⧉ {elsewhere.length}
+            </button>
+            {xrefOpen && (
+              <div className="xref-pop">
+                <div className="xref-pop-hd">Also appears in</div>
+                {elsewhere.map((pl, i) => (
+                  <div
+                    key={i}
+                    className="xref-item"
+                    style={{ borderLeftColor: pl.col }}
+                    onClick={e => {
+                      e.stopPropagation();
+                      setXrefOpen(false);
+                      onNavigate?.(pl);
+                    }}
+                  >
+                    <span className="xref-cat" style={{ color: pl.col }}>{pl.nm}</span>
+                    <span className="xref-loc">B{pl.bi + 1} {pl.bname} › {pl.sname}</span>
+                    <span className={`xref-role xr-${pl.role}`}>{pl.role}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </span>
         )}
       </span>
       <span className="tags">

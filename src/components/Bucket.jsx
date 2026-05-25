@@ -1,21 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import SubIdea from './SubIdea';
 import { countVisible } from '../utils/filter';
 
 const TIER_CLASS = { 'Must Do': 'must-do', 'High': 'high', 'Standard': 'standard', 'Bonus': 'bonus' };
 
-export default function Bucket({ bucket, bi, patKey, problems, filters, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets, onOpenTemplate, onOpenMove, forceOpen, scrollToSub }) {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => { if (forceOpen) setOpen(true); }, [forceOpen]);
-
+export default function Bucket({ bucket, bi, patKey, problems, filters, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets, onOpenTemplate, onOpenMove, placements, onNavigate, open, onToggle, scrollToSub }) {
   useEffect(() => {
     if (scrollToSub == null) return;
     const el = document.getElementById(`sub-${bi}-${scrollToSub}`);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, [scrollToSub, bi]);
 
-  const isOpen = open || !!filters.search || forceOpen;
+  const isOpen = open || !!filters.search;
 
   // count visible reps for this bucket
   const allNums = bucket.subs.flatMap(s => [...(s.rep||[]), ...(filters.repOnly?[]:(s.var||[])), ...(filters.repOnly?[]:(s.similar||[]))]);
@@ -32,11 +28,11 @@ export default function Bucket({ bucket, bi, patKey, problems, filters, isDone, 
   const rawDone = rawAll.filter(n => isDone(n)).length;
   const progPct = rawAll.length > 0 ? (rawDone / rawAll.length) * 100 : 0;
 
-  const subProps = { patKey, problems, filters, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets, onOpenTemplate, onOpenMove };
+  const subProps = { patKey, problems, filters, isDone, getNote, hasTag, setDone, setNote, toggleTag, companySets, onOpenTemplate, onOpenMove, placements, onNavigate };
 
   return (
     <div id={`bucket-${bi}`} className={`bucket${isOpen ? ' open' : ''}`}>
-      <div className="bh" onClick={() => setOpen(o => !o)}>
+      <div className="bh" onClick={onToggle}>
         <span className="bn">{bi + 1}</span>
         <span className="btitle">
           <span className="bname">{bucket.name}</span>

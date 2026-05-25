@@ -1,24 +1,10 @@
-import patternMeta from '../data/patternMeta.json';
-import patterns from '../data/patterns.json';
-
 const ROLE_COLOR = { rep: 'var(--accent)', var: 'var(--accent2)', similar: 'var(--fg3)' };
 
-export default function GlobalSearch({ num, problems, onNavigate }) {
+export default function GlobalSearch({ num, problems, placements, onNavigate }) {
   const p = problems[String(num)];
   if (!p) return null;
 
-  const hits = [];
-  patternMeta.forEach(([k, nm, col]) => {
-    patterns[k]?.buckets.forEach((b, bi) => {
-      b.subs.forEach((s, si) => {
-        let role = null;
-        if ((s.rep||[]).includes(num)) role = 'rep';
-        else if ((s.var||[]).includes(num)) role = 'var';
-        else if ((s.similar||[]).includes(num)) role = 'similar';
-        if (role) hits.push({ k, nm, col, bi, si, bname: b.name, sname: s.idea, role });
-      });
-    });
-  });
+  const hits = placements?.get(num) || [];
 
   return (
     <div style={{ marginBottom: 16 }}>
