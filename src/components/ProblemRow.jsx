@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import companies from '../data/companies.json';
 import solutionsIndex from '../data/solutionsIndex.js';
+import neetcodeIndex from '../data/neetcodeIndex.js';
 
 const TAGS = ['redo', 'tricky', 'tle', 'hint'];
 const TLAB = { redo: 'redo', tricky: 'tricky', tle: 'TLE', hint: 'hint' };
@@ -67,6 +68,17 @@ export default function ProblemRow({ n, problems, role, isDone, getNote, hasTag,
             title="View solution on GitHub"
           >
             {'</>'}
+          </a>
+        )}
+        {neetcodeIndex.has(String(n)) && (
+          <a
+            className="nc-link"
+            href={`https://neetcode.io/solutions/${p.slug}`}
+            target="_blank"
+            rel="noopener"
+            title="View NeetCode solution & video"
+          >
+            NC
           </a>
         )}
         {' '}
