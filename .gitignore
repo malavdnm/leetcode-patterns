@@ -26,3 +26,6 @@ dist-ssr
 # Test artifacts
 test-results/
 .coverage/
+
+# orc's task list, which is yours and not the project's.
+todo.yaml
